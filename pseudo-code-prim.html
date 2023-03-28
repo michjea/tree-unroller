@@ -1,0 +1,27 @@
+<pre class="fs-10" id="pseudo-code">
+ConstruireArbreARPM() :
+marquer tous les sommets comme non visités
+<b>pour</b> chaque sommet du graphe <b>boucler</b>
+    VisiterLeSommet()
+<b>fin boucler</b>
+
+VisiterLeSommet() :
+<b>si</b> le sommet est non visité <b>alors</b>
+    déposer le sommet et une priorité quelconque quand la queue de priorité
+    <b>tant que</b> la queue de priorité n'est pas vide <b>boucler</b>
+        prélever le sommet de tête (il devient le sommet courant)
+        marquer le sommet courant comme visité 
+        traiter le sommet courant
+        <b>pour</b> chaque sommet S voisin du sommet courant, <b>boucler</b>
+            <b>si</b> S n'est pas visité <b>alors</b>
+                calculer la priorité de S (poids de l'arc)
+                <b>si</b> S n'est pas rencontré <b>alors</b>
+                    déposer S avec sa priorité -> queue de priorité
+                <b>sinon si</b> la nouvelle priorité est plus basse <b>alors</b>
+                    diminuer la priorité de S dans la file de priorité
+                <b>fin si</b>
+            <b>fin si</b>
+        <b>fin boucler</b>
+    <b>fin boucler</b>
+<b>fin si</b>
+</pre>

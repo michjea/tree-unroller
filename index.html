@@ -1,0 +1,164 @@
+<!doctype html>
+<html class="h-100" lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TreeUnroller</title>
+
+    <!-- Bootsptrap's CSS : -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    
+    <!-- Graphology et sigma -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/graphology/0.24.1/graphology.umd.min.js" integrity="sha512-ZSbtxy6ffYeoKf1ViyWskqHuZxc2plIQkFmcHYfjkiVA5TLKMtYHPolFRJLRjq9sNYASRlUztsVPB9vYnXEGTw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/2.0.0-alpha34/sigma.js" integrity="sha512-rPgxkPhwHZhKHOWqVoUbNHcyH3/LOaaQwKnFWQfTliLxQGjhuInAXpwCySFwKexOK3m3f2sF+DNMV0coQKM8Hg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Sigma core -->
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/sigma.core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/conrad.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/utils/sigma.utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/utils/sigma.polyfills.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/sigma.settings.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.dispatcher.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.configurable.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.graph.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.camera.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.quad.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.edgequad.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/captors/sigma.captors.mouse.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/captors/sigma.captors.touch.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/sigma.renderers.canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/sigma.renderers.webgl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/sigma.renderers.svg.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/sigma.renderers.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.labels.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.hovers.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.nodes.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.curve.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.arrow.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.curvedArrow.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edgehovers.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edgehovers.curve.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edgehovers.arrow.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edgehovers.curvedArrow.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.extremities.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/middlewares/sigma.middlewares.rescale.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/middlewares/sigma.middlewares.copy.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/misc/sigma.misc.animation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/misc/sigma.misc.bindEvents.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/misc/sigma.misc.bindDOMEvents.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/misc/sigma.misc.drawHovers.js"></script>
+
+    <!-- Sigma plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.layout.forceAtlas2/supervisor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.layout.forceAtlas2/worker.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.renderers.edgeLabels/settings.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.renderers.edgeLabels/sigma.canvas.edges.labels.def.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.renderers.edgeLabels/sigma.canvas.edges.labels.curve.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.renderers.edgeLabels/sigma.canvas.edges.labels.curvedArrow.js"></script>
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+    <!-- My scripts -->
+    <script src="algos.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body class="h-100">
+
+    <!-- Bootsptrap's JS : -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    
+    <div class="h-100 container-fluid">
+    <div class="h-100 row justify-content-start">
+        <!-- Paramètres -->   
+        <div class="h-200 col-4 d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 30em; height: 100%">
+            <p class="h1 text-primary" style="font-family: 'Roboto Condensed', sans-serif; margin: 2%;">TreeUnroller</p>
+            <!-- Boutons radio -->
+            <div class="btn-group-vertical" role="group" aria-label="Algorithme" style="margin: 2%;">
+                <p class="fs-6">Algorithm :</p>
+                <div class="form-check">
+                    <input class="form-check-input btnParam" type="radio" name="radioAlgo" id="radioPrim" checked onclick="onPrimClick(this)">
+                    <label class="form-check-label" for="radioPrim">
+                        Prim
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input btnParam" type="radio" name="radioAlgo" id="radioDjikstra" onclick="onDijkstraClick(this)">
+                    <label class="form-check-label" for="radioDjikstra">
+                        Dijkstra
+                    </label>
+                </div>
+            </div>
+
+            <!-- Tableau -->
+            <div class="table-responsive" style="height: 60%; margin-top: 2%; margin-bottom: 2%;">
+                <div id="tab-container">
+                    <script>
+                        $(function(){
+                            $("#tab-container").load("data.html", function(){
+                                    onInputChange();
+                                });
+                        });
+                    </script>
+                </div>
+            </div>
+
+            <!-- DropDown Prim-->
+            <div class="container" style="margin: 2%;">
+                <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#content">Pseudo-code</button>
+                <div class="collapse" id="content">
+                    <div class="card">
+                        <div class="card-body" id="pseudocode">
+                        <script>
+                            $(function(){
+                                $("#pseudocode").load("pseudo-code-prim.html");
+                            });
+                        </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Graph -->
+        <div class="h-100 col-8 justify-content-center">
+            <!-- Dessin -->
+            <div class="h-80 row align-items-center" style="width:100%;height:80%; padding: 3%;">
+                <div class="col-md-auto" id="sigma-container" style="width:100%;height:100%;"></div>
+            </div>  
+            <div class="h-10 row align-items-center justify-content-md-center" style="height: 10%;">
+                <div class="col-md-auto" style="height: 100%;">
+                    <table class="table" id="queue-container">
+                        <tbody>
+                            <tr>
+                                <td>?</td>
+                            </tr>
+                            <tr>
+                                <td>?</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="h-10 row align-items-center justify-content-md-center" style="height: 10%;">
+                <div class="col-md-auto">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="onStartClick()" id="playBtn">Play</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="onPauseClick()" id="pauseBtn" disabled>Pause</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="onBackwardClick()" id="bBtn" disabled>Step backward</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="onForwardClick()" id="fBtn" disabled>Step forward</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  </body>  
+</html>
